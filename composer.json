@@ -1,0 +1,43 @@
+{
+    "name": "nepada/presenter-mapping",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "description": "Improved presenter mapping for PresenterFactory from Nette.",
+    "keywords": ["nette", "presenter", "mapping"],
+    "support": {
+        "email": "petr@pada.cz",
+        "issues": "https://github.com/nepada/presenter-mapping/issues"
+    },
+    "authors": [
+        {
+            "name": "Petr Morávek",
+            "email": "petr@pada.cz"
+        }
+    ],
+    "require": {
+        "php": ">= 5.6.0",
+        "nette/utils": "~2.2@dev",
+        "nette/application": "~2.3@dev"
+    },
+    "require-dev": {
+        "nette/tester": "~1.6",
+        "nette/bootstrap": "~2.3@dev",
+        "nette/di": "~2.3@dev",
+        "nette/http": "~2.3@dev",
+        "tracy/tracy": "~2.3@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nepada\\Bridges\\": "src/Bridges/",
+            "Nepada\\PresenterMapping\\": "src/PresenterMapping/"
+        },
+        "classmap": [
+            "src/PresenterMapping/exceptions.php"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
