@@ -1,0 +1,7 @@
+extensions:
+    presenterMapping: Nepada\Bridges\PresenterMappingDI\PresenterMappingExtension
+
+application:
+    scanDirs: false
+    mapping:
+        *: App\*Module\*Presenter
