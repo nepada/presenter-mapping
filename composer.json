@@ -16,15 +16,15 @@
     ],
     "require": {
         "php": ">= 5.6.0",
-        "nette/utils": "~2.2@dev",
-        "nette/application": "~2.3@dev"
+        "nette/utils": "^2.2@dev",
+        "nette/application": "^2.3@dev"
     },
     "require-dev": {
-        "nette/tester": "~1.6",
-        "nette/bootstrap": "~2.3@dev",
-        "nette/di": "~2.3@dev",
-        "nette/http": "~2.3@dev",
-        "tracy/tracy": "~2.3@dev"
+        "nette/tester": "^1.6",
+        "nette/bootstrap": "^2.3@dev",
+        "nette/di": "^2.3@dev",
+        "nette/http": "^2.3@dev",
+        "tracy/tracy": "^2.3@dev"
     },
     "autoload": {
         "psr-4": {
