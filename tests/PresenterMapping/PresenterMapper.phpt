@@ -1,5 +1,7 @@
 <?php
 /**
+ * Test: Nepada\PresenterMapping\PresenterMapper
+ *
  * This file is part of the nepada/presenter-mapping.
  * Copyright (c) 2016 Petr Morávek (petr@pada.cz)
  */
