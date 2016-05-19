@@ -26,8 +26,9 @@ class PresenterMappingExtension extends Nette\DI\CompilerExtension
             ->setClass(PresenterMapping\PresenterMapper::class);
 
         $presenterFactory = $this->getNettePresenterFactory();
-        $presenterFactory->getFactory()->setEntity(PresenterMapping\PresenterFactory::class);
-        array_unshift($presenterFactory->getFactory()->arguments, $this->prefix('@presenterMapper'));
+        $arguments = $presenterFactory->getFactory()->arguments;
+        array_unshift($arguments, $this->prefix('@presenterMapper'));
+        $presenterFactory->setFactory(PresenterMapping\PresenterFactory::class, $arguments);
     }
 
     /**
