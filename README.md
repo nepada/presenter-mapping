@@ -1,6 +1,10 @@
 Presenter Mapping
 =================
 
+[![Build Status](https://travis-ci.org/nepada/presenter-mapping.svg?branch=master)](https://travis-ci.org/nepada/presenter-mapping)
+[![Downloads this Month](https://img.shields.io/packagist/dm/nepada/presenter-mapping.svg)](https://packagist.org/packages/nepada/presenter-mapping)
+[![Latest stable](https://img.shields.io/packagist/v/nepada/presenter-mapping.svg)](https://packagist.org/packages/nepada/presenter-mapping)
+
 
 Installation
 ------------
