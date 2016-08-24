@@ -1,0 +1,36 @@
+language: php
+php:
+    - 5.6
+    - 7.0
+    - hhvm
+
+env:
+    matrix:
+        - dependencies=""
+        - dependencies="--prefer-stable"
+
+matrix:
+    allow_failures:
+        - php: hhvm
+
+    include:
+        - php: 5.6
+          env: dependencies="--prefer-lowest --prefer-stable"
+
+before_install:
+    - composer self-update
+
+install:
+    - composer update --no-interaction --prefer-source $dependencies
+
+script:
+    - vendor/bin/tester tests -s -p php
+
+after_failure:
+    - for i in $(find tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
+
+sudo: false
+
+cache:
+    directories:
+        - $HOME/.composer/cache
