@@ -36,7 +36,7 @@ class PresenterMapper extends Nette\Object
     public function setMapping(array $mapping)
     {
         foreach ($mapping as $name => $mask) {
-            if (strpos($mask, '*') === false) {
+            if (is_string($mask) && strpos($mask, '*') === false) {
                 $this->setPresenterMapping($name, $mask);
             } else {
                 $this->setModuleMapping(rtrim($name, '*'), $mask);
@@ -72,10 +72,17 @@ class PresenterMapper extends Nette\Object
      */
     public function setModuleMapping($module, $mask)
     {
-        if (!preg_match('#^\\\\?([\w\\\\]*\\\\)?(\w*\*\w*?\\\\)?([\w\\\\]*\*\w*)\z#', $mask, $m)) {
-            throw new Nette\InvalidArgumentException("Invalid module mapping mask '$mask'.");
+        $module = trim($module, ':');
+        if (is_string($mask)) {
+            if (!preg_match('#^\\\\?([\w\\\\]*\\\\)?(\w*\*\w*?\\\\)?([\w\\\\]*\*\w*)\z#', $mask, $m)) {
+                throw new Nette\InvalidStateException("Invalid mapping mask '$mask'.");
+            }
+            $this->moduleMapping[$module] = [$m[1], $m[2] ?: '*Module\\', $m[3]];
+        } elseif (is_array($mask) && count($mask) === 3) {
+            $this->moduleMapping[$module] = [$mask[0] ? $mask[0] . '\\' : '', $mask[1] . '\\', $mask[2]];
+        } else {
+            throw new Nette\InvalidStateException("Invalid mapping mask for module '$module'.");
         }
-        $this->moduleMapping[trim($module, ':')] = [$m[1], $m[2] ?: '*Module\\', $m[3]];
         uksort($this->moduleMapping, function ($a, $b) {return (substr_count($b, ':') - substr_count($a, ':')) ?: strcmp($b, $a);});
         return $this;
     }

@@ -28,7 +28,7 @@ class PresenterMapperTest extends Tester\TestCase
     {
         $this->presenterMapper = new PresenterMapper;
         $this->presenterMapper->setMapping([
-                '*' => 'App\*Module\*Presenter',
+                '*' => ['App', 'Module\*', 'Presenter\*'],
                 'Foo' => 'Foo\*FooModule\*FooPresenter',
                 'Foo:Bar' => 'FooBar\*FooBarModule\*FooBarPresenter',
                 'Foo:Bar:Baz' => 'BazPresenter',
@@ -43,8 +43,8 @@ class PresenterMapperTest extends Tester\TestCase
             ['Foo:Bar:Abc:Xyz', 'FooBar\AbcFooBarModule\XyzFooBarPresenter'],
             ['Foo:Abc:Xyz', 'Foo\AbcFooModule\XyzFooPresenter'],
             ['Foo:Xyz', 'Foo\XyzFooPresenter'],
-            ['Abc:Xyz', 'App\AbcModule\XyzPresenter'],
-            ['Xyz', 'App\XyzPresenter'],
+            ['Abc:Xyz', 'App\Module\Abc\Presenter\Xyz'],
+            ['Xyz', 'App\Presenter\Xyz'],
         ];
     }
 
@@ -57,6 +57,15 @@ class PresenterMapperTest extends Tester\TestCase
     {
         Assert::same($class, $this->presenterMapper->formatPresenterClass($presenter));
         Assert::same($presenter, $this->presenterMapper->unformatPresenterClass($class));
+    }
+
+    /**
+     * @throws Nette\InvalidStateException Invalid mapping mask for module 'invalid'.
+     */
+    public function testInvalidMapping()
+    {
+        $presenterMapper = new PresenterMapper;
+        $presenterMapper->setMapping(['invalid' => ['*', '*']]);
     }
 
 }
