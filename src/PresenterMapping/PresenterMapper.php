@@ -120,7 +120,7 @@ class PresenterMapper extends Nette\Object
      * Formats presenter name from class name.
      *
      * @param string $class
-     * @return string
+     * @return string|null
      */
     public function unformatPresenterClass($class)
     {
