@@ -6,12 +6,15 @@
 
 namespace Nepada\PresenterMapping;
 
+use RuntimeException;
+
 
 /**
  * Common interface for exceptions
  */
 interface Exception
 {
+
 }
 
 
@@ -19,6 +22,7 @@ interface Exception
  * The exception that is thrown when a method call is invalid for the object's
  * current state, method has been invoked at an illegal or inappropriate time.
  */
-class InvalidStateException extends \RuntimeException implements Exception
+class InvalidStateException extends RuntimeException implements Exception
 {
+
 }

@@ -56,7 +56,8 @@ class PresenterMapper extends Nette\Object
         $presenter = trim($presenter, ':');
         $class = ltrim($class, '\\');
 
-        if ($conflict = array_search($class, $this->presenterMapping, true)) {
+        $conflict = array_search($class, $this->presenterMapping, true);
+        if ($conflict) {
             throw new Nette\InvalidStateException("Presenter class conflict: '$conflict' and '$presenter' both point to '$class'.");
         }
 
@@ -83,7 +84,12 @@ class PresenterMapper extends Nette\Object
         } else {
             throw new Nette\InvalidStateException("Invalid mapping mask for module '$module'.");
         }
-        uksort($this->moduleMapping, function ($a, $b) {return (substr_count($b, ':') - substr_count($a, ':')) ?: strcmp($b, $a);});
+        uksort(
+            $this->moduleMapping,
+            function ($a, $b) {
+                return (substr_count($b, ':') - substr_count($a, ':')) ?: strcmp($b, $a);
+            }
+        );
         return $this;
     }
 
@@ -124,7 +130,8 @@ class PresenterMapper extends Nette\Object
      */
     public function unformatPresenterClass($class)
     {
-        if ($presenter = array_search($class, $this->presenterMapping, true)) {
+        $presenter = array_search($class, $this->presenterMapping, true);
+        if ($presenter) {
             return $presenter;
         }
 
