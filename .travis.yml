@@ -26,7 +26,7 @@ install:
 
 script:
     - vendor/bin/parallel-lint -e php,phpt --exclude tests/temp src tests
-    - vendor/bin/phpcs --standard=vendor/nepada/coding-standard/src/CodingStandard/ruleset.xml --encoding=utf-8 -sp src tests
+    - vendor/bin/phpcs --standard=vendor/nepada/coding-standard/src/Nepada/ruleset.xml --encoding=utf-8 -sp src tests
     - vendor/bin/tester tests -s -p php
 
 after_failure:
