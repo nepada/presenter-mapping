@@ -30,7 +30,7 @@ class PresenterMapper extends Nette\Object
      *      ['App:Foo' => 'App\FooModule\*Module\*Presenter', '*' => '*Module\*Presenter']
      *
      * @param array $mapping
-     * @return self
+     * @return static
      * @throws Nette\InvalidStateException
      */
     public function setMapping(array $mapping)
@@ -48,7 +48,7 @@ class PresenterMapper extends Nette\Object
     /**
      * @param string $presenter
      * @param string $class
-     * @return self
+     * @return static
      * @throws Nette\InvalidStateException
      */
     public function setPresenterMapping($presenter, $class)
@@ -68,7 +68,7 @@ class PresenterMapper extends Nette\Object
     /**
      * @param string $module
      * @param string $mask
-     * @return self
+     * @return static
      * @throws Nette\InvalidArgumentException
      */
     public function setModuleMapping($module, $mask)
