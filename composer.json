@@ -21,7 +21,7 @@
     },
     "require-dev": {
         "nette/tester": "^1.7",
-        "nette/bootstrap": "^2.4@dev || ^3.0@dev",
+        "nette/bootstrap": "^2.4.1@dev || ^3.0@dev",
         "nette/di": "^2.4.7@dev || ^3.0@dev",
 
         "nette/component-model": "^2.3@dev || ^3.0@dev",
@@ -30,8 +30,8 @@
         "nette/php-generator": "^2.4@dev || ^3.0@dev",
         "nette/caching": "^2.5@dev || ^3.0@dev",
         "nette/finder": "^2.4@dev || ^3.0@dev",
-        "nette/http": "^2.4@dev || ^3.0@dev",
-        "tracy/tracy": "^2.4@dev || ^3.0@dev"
+        "nette/http": "^2.4.0@dev || ^3.0@dev",
+        "tracy/tracy": "^2.4.1@dev || ^3.0@dev"
     },
     "suggest": {
         "nette/di": "for integration with Nette DI container"
