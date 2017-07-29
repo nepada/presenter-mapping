@@ -37,6 +37,7 @@ Example:
 ```yaml
 application:
     mapping:
+        '*': ['App', 'Module\*', 'Presenter\*']
         'Foo': Foo\*Module\*Presenter
         'Foo:Bar': Bar\*Module\*Presenter
 ```
