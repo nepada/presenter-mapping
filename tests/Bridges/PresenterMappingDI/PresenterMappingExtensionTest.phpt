@@ -6,6 +6,8 @@
  * Copyright (c) 2016 Petr Morávek (petr@pada.cz)
  */
 
+declare(strict_types = 1);
+
 namespace NepadaTests\Bridges\PresenterMappingDI;
 
 use Nepada\PresenterMapping\PresenterFactory;
@@ -25,27 +27,27 @@ class PresenterMappingExtensionTest extends Tester\TestCase
     private $container;
 
 
-    public function setUp()
+    public function testServices(): void
+    {
+        Assert::type(PresenterMapper::class, $this->container->getService('presenterMapping.presenterMapper'));
+        Assert::type(PresenterFactory::class, $this->container->getService('application.presenterFactory'));
+    }
+
+    public function testMapping(): void
+    {
+        /** @var PresenterFactory $presenterFactory */
+        $presenterFactory = $this->container->getByType(Nette\Application\IPresenterFactory::class);
+
+        Assert::same('App\FooModule\BarPresenter', $presenterFactory->formatPresenterClass('Foo:Bar'));
+    }
+
+    protected function setUp(): void
     {
         $configurator = new Nette\Configurator;
         $configurator->setTempDirectory(TEMP_DIR);
         $configurator->setDebugMode(true);
         $configurator->addConfig(__DIR__ . '/fixtures/config.neon');
         $this->container = $configurator->createContainer();
-    }
-
-    public function testServices()
-    {
-        Assert::type(PresenterMapper::class, $this->container->getService('presenterMapping.presenterMapper'));
-        Assert::type(PresenterFactory::class, $this->container->getService('application.presenterFactory'));
-    }
-
-    public function testMapping()
-    {
-        /** @var PresenterFactory $presenterFactory */
-        $presenterFactory = $this->container->getByType(Nette\Application\IPresenterFactory::class);
-
-        Assert::same('App\FooModule\BarPresenter', $presenterFactory->formatPresenterClass('Foo:Bar'));
     }
 
 }

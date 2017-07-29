@@ -4,6 +4,8 @@
  * Copyright (c) 2016 Petr Morávek (petr@pada.cz)
  */
 
+declare(strict_types = 1);
+
 namespace Nepada\PresenterMapping;
 
 use Nette;
@@ -18,9 +20,9 @@ class PresenterFactory extends Nette\Application\PresenterFactory
 
     /**
      * @param PresenterMapper $presenterMapper
-     * @param callable $factory function (string $class): IPresenter
+     * @param callable|null $factory function (string $class): IPresenter
      */
-    public function __construct(PresenterMapper $presenterMapper, callable $factory = null)
+    public function __construct(PresenterMapper $presenterMapper, ?callable $factory = null)
     {
         parent::__construct($factory);
         $this->presenterMapper = $presenterMapper;
@@ -29,6 +31,8 @@ class PresenterFactory extends Nette\Application\PresenterFactory
     /**
      * Formats presenter class name from its name.
      *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint
      * @param string $presenter
      * @return string
      */
@@ -40,8 +44,10 @@ class PresenterFactory extends Nette\Application\PresenterFactory
     /**
      * Formats presenter name from class name.
      *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint
      * @param string $class
-     * @return string
+     * @return string|null
      */
     public function unformatPresenterClass($class)
     {
@@ -51,9 +57,10 @@ class PresenterFactory extends Nette\Application\PresenterFactory
     /**
      * BC with Nette PresenterFactory, use PresenterMapping::setMapping() instead.
      *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint
      * @deprecated
-     * @param array $mapping
-     * @return Nette\Application\PresenterFactory
+     * @param string[]|string[][] $mapping
+     * @return static
      */
     public function setMapping(array $mapping)
     {

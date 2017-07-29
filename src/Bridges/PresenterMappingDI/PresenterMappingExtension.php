@@ -4,6 +4,8 @@
  * Copyright (c) 2016 Petr Morávek (petr@pada.cz)
  */
 
+declare(strict_types = 1);
+
 namespace Nepada\Bridges\PresenterMappingDI;
 
 use Nepada\PresenterMapping;
@@ -13,20 +15,20 @@ use Nette;
 class PresenterMappingExtension extends Nette\DI\CompilerExtension
 {
 
-    /** @var array */
-    public $defaults = [];
-
-
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint
+     */
     public function loadConfiguration()
     {
-        $this->validateConfig($this->defaults);
+        $this->validateConfig([]);
         $container = $this->getContainerBuilder();
 
         $container->addDefinition($this->prefix('presenterMapper'))
             ->setClass(PresenterMapping\PresenterMapper::class);
 
         $presenterFactory = $this->getNettePresenterFactory();
-        $arguments = $presenterFactory->getFactory()->arguments;
+        $factory = $presenterFactory->getFactory();
+        $arguments = $factory !== null ? $factory->arguments : [];
         array_unshift($arguments, $this->prefix('@presenterMapper'));
         $presenterFactory->setFactory(PresenterMapping\PresenterFactory::class, $arguments);
     }
@@ -36,7 +38,7 @@ class PresenterMappingExtension extends Nette\DI\CompilerExtension
      *
      * @return Nette\DI\ServiceDefinition
      */
-    public function getNettePresenterFactory()
+    public function getNettePresenterFactory(): Nette\DI\ServiceDefinition
     {
         $applicationExtension = $this->compiler->getExtensions(Nette\Bridges\ApplicationDI\ApplicationExtension::class);
         if (!$applicationExtension) {

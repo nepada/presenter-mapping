@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 // The Nette Tester command-line runner can be
 // invoked through the command: ../vendor/bin/tester .
@@ -29,7 +30,7 @@ $_SERVER['REQUEST_TIME'] = 1234567890;
 $_ENV = $_GET = $_POST = [];
 
 
-function run(Tester\TestCase $testCase)
+function run(Tester\TestCase $testCase): void
 {
     $testCase->run(isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : null);
 }

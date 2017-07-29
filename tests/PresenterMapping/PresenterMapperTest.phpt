@@ -6,6 +6,8 @@
  * Copyright (c) 2016 Petr Morávek (petr@pada.cz)
  */
 
+declare(strict_types = 1);
+
 namespace NepadaTests\PresenterMapping;
 
 use Nepada\PresenterMapping\PresenterMapper;
@@ -24,18 +26,10 @@ class PresenterMapperTest extends Tester\TestCase
     private $presenterMapper;
 
 
-    public function setUp()
-    {
-        $this->presenterMapper = new PresenterMapper;
-        $this->presenterMapper->setMapping([
-                '*' => ['App', 'Module\*', 'Presenter\*'],
-                'Foo' => 'Foo\*FooModule\*FooPresenter',
-                'Foo:Bar' => 'FooBar\*FooBarModule\*FooBarPresenter',
-                'Foo:Bar:Baz' => 'BazPresenter',
-            ]);
-    }
-
-    public function getMapping()
+    /**
+     * @return mixed[]
+     */
+    public function getMapping(): array
     {
         return [
             ['Foo:Bar:Baz', 'BazPresenter'],
@@ -53,7 +47,7 @@ class PresenterMapperTest extends Tester\TestCase
      * @param string $presenter
      * @param string $class
      */
-    public function testMapping($presenter, $class)
+    public function testMapping(string $presenter, string $class): void
     {
         Assert::same($class, $this->presenterMapper->formatPresenterClass($presenter));
         Assert::same($presenter, $this->presenterMapper->unformatPresenterClass($class));
@@ -62,10 +56,21 @@ class PresenterMapperTest extends Tester\TestCase
     /**
      * @throws Nette\InvalidStateException Invalid mapping mask for module 'invalid'.
      */
-    public function testInvalidMapping()
+    public function testInvalidMapping(): void
     {
         $presenterMapper = new PresenterMapper;
         $presenterMapper->setMapping(['invalid' => ['*', '*']]);
+    }
+
+    protected function setUp(): void
+    {
+        $this->presenterMapper = new PresenterMapper;
+        $this->presenterMapper->setMapping([
+            '*' => ['App', 'Module\*', 'Presenter\*'],
+            'Foo' => 'Foo\*FooModule\*FooPresenter',
+            'Foo:Bar' => 'FooBar\*FooBarModule\*FooBarPresenter',
+            'Foo:Bar:Baz' => 'BazPresenter',
+        ]);
     }
 
 }

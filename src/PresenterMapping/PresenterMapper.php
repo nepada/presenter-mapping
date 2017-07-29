@@ -4,18 +4,22 @@
  * Copyright (c) 2016 Petr Morávek (petr@pada.cz)
  */
 
+declare(strict_types = 1);
+
 namespace Nepada\PresenterMapping;
 
 use Nette;
 
 
-class PresenterMapper extends Nette\Object
+class PresenterMapper
 {
 
-    /** @var array of presenter name => class */
+    use Nette\SmartObject;
+
+    /** @var string[] of presenter name => class */
     private $presenterMapping = [];
 
-    /** @var array[] of module => splitted mask */
+    /** @var string[][] of module => splitted mask */
     private $moduleMapping = [
         '' => ['', '*Module\\', '*Presenter'],
         'Nette' => ['NetteModule\\', '*\\', '*Presenter'],
@@ -29,11 +33,11 @@ class PresenterMapper extends Nette\Object
      * Example 2 - set mapping for modules:
      *      ['App:Foo' => 'App\FooModule\*Module\*Presenter', '*' => '*Module\*Presenter']
      *
-     * @param array $mapping
+     * @param string[]|string[][] $mapping
      * @return static
      * @throws Nette\InvalidStateException
      */
-    public function setMapping(array $mapping)
+    public function setMapping(array $mapping): self
     {
         foreach ($mapping as $name => $mask) {
             if (is_string($mask) && strpos($mask, '*') === false) {
@@ -51,7 +55,7 @@ class PresenterMapper extends Nette\Object
      * @return static
      * @throws Nette\InvalidStateException
      */
-    public function setPresenterMapping($presenter, $class)
+    public function setPresenterMapping(string $presenter, string $class): self
     {
         $presenter = trim($presenter, ':');
         $class = ltrim($class, '\\');
@@ -67,11 +71,11 @@ class PresenterMapper extends Nette\Object
 
     /**
      * @param string $module
-     * @param string $mask
+     * @param string|string[] $mask
      * @return static
      * @throws Nette\InvalidArgumentException
      */
-    public function setModuleMapping($module, $mask)
+    public function setModuleMapping(string $module, $mask): self
     {
         $module = trim($module, ':');
         if (is_string($mask)) {
@@ -99,7 +103,7 @@ class PresenterMapper extends Nette\Object
      * @param string $presenter
      * @return string
      */
-    public function formatPresenterClass($presenter)
+    public function formatPresenterClass(string $presenter): string
     {
         if (isset($this->presenterMapping[$presenter])) {
             return $this->presenterMapping[$presenter];
@@ -128,7 +132,7 @@ class PresenterMapper extends Nette\Object
      * @param string $class
      * @return string|null
      */
-    public function unformatPresenterClass($class)
+    public function unformatPresenterClass(string $class): ?string
     {
         $presenter = array_search($class, $this->presenterMapping, true);
         if ($presenter) {
