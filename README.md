@@ -2,6 +2,7 @@ Presenter Mapping
 =================
 
 [![Build Status](https://travis-ci.org/nepada/presenter-mapping.svg?branch=master)](https://travis-ci.org/nepada/presenter-mapping)
+[![Coverage Status](https://coveralls.io/repos/github/nepada/presenter-mapping/badge.svg?branch=master)](https://coveralls.io/github/nepada/presenter-mapping?branch=master)
 [![Downloads this Month](https://img.shields.io/packagist/dm/nepada/presenter-mapping.svg)](https://packagist.org/packages/nepada/presenter-mapping)
 [![Latest stable](https://img.shields.io/packagist/v/nepada/presenter-mapping.svg)](https://packagist.org/packages/nepada/presenter-mapping)
 
