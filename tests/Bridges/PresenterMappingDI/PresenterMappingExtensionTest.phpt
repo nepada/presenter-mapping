@@ -56,4 +56,4 @@ class PresenterMappingExtensionTest extends Tester\TestCase
 }
 
 
-\run(new PresenterMappingExtensionTest());
+(new PresenterMappingExtensionTest())->run();

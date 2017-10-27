@@ -79,4 +79,4 @@ class PresenterMapperTest extends Tester\TestCase
 }
 
 
-\run(new PresenterMapperTest());
+(new PresenterMapperTest())->run();
