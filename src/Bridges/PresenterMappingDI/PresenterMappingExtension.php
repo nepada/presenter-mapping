@@ -41,7 +41,7 @@ class PresenterMappingExtension extends Nette\DI\CompilerExtension
     public function getNettePresenterFactory(): Nette\DI\ServiceDefinition
     {
         $applicationExtension = $this->compiler->getExtensions(Nette\Bridges\ApplicationDI\ApplicationExtension::class);
-        if (!$applicationExtension) {
+        if ($applicationExtension === []) {
             throw new PresenterMapping\InvalidStateException('ApplicationExtension not found, did you register it in your configuration?');
         }
 

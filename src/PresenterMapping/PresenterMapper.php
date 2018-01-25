@@ -84,7 +84,7 @@ class PresenterMapper
             }
             $this->moduleMapping[$module] = [$m[1], $m[2] ?: '*Module\\', $m[3]];
         } elseif (is_array($mask) && count($mask) === 3) {
-            $this->moduleMapping[$module] = [$mask[0] ? $mask[0] . '\\' : '', $mask[1] . '\\', $mask[2]];
+            $this->moduleMapping[$module] = [$mask[0] !== '' ? $mask[0] . '\\' : '', $mask[1] . '\\', $mask[2]];
         } else {
             throw new Nette\InvalidStateException("Invalid mapping mask for module '$module'.");
         }
