@@ -15,10 +15,7 @@ use Nette;
 class PresenterMappingExtension extends Nette\DI\CompilerExtension
 {
 
-    /**
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint
-     */
-    public function loadConfiguration()
+    public function loadConfiguration(): void
     {
         $this->validateConfig([]);
         $container = $this->getContainerBuilder();
