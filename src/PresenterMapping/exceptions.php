@@ -14,7 +14,7 @@ use RuntimeException;
 /**
  * Common interface for exceptions
  */
-interface Exception
+interface Exception extends \Throwable
 {
 
 }
