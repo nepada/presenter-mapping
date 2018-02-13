@@ -54,13 +54,13 @@ class PresenterMapperTest extends Tester\TestCase
      */
     public function testInvalidMapping(): void
     {
-        $presenterMapper = new PresenterMapper;
+        $presenterMapper = new PresenterMapper();
         $presenterMapper->setMapping(['invalid' => ['*', '*']]);
     }
 
     protected function setUp(): void
     {
-        $this->presenterMapper = new PresenterMapper;
+        $this->presenterMapper = new PresenterMapper();
         $this->presenterMapper->setMapping([
             '*' => ['App', 'Module\*', 'Presenter\*'],
             'Foo' => 'Foo\*FooModule\*FooPresenter',

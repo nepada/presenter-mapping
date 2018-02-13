@@ -39,7 +39,7 @@ class PresenterMappingExtensionTest extends Tester\TestCase
 
     protected function setUp(): void
     {
-        $configurator = new Nette\Configurator;
+        $configurator = new Nette\Configurator();
         $configurator->setTempDirectory(TEMP_DIR);
         $configurator->setDebugMode(true);
         $configurator->addConfig(__DIR__ . '/fixtures/config.neon');
