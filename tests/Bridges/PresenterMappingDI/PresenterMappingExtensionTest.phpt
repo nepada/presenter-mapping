@@ -1,11 +1,4 @@
 <?php
-/**
- * Test: Nepada\Bridges\PresenterMappingDI\PresenterMappingExtension
- *
- * This file is part of the nepada/presenter-mapping.
- * Copyright (c) 2016 Petr Morávek (petr@pada.cz)
- */
-
 declare(strict_types = 1);
 
 namespace NepadaTests\Bridges\PresenterMappingDI;
