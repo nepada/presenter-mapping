@@ -8,7 +8,6 @@ use Nette;
 use Tester;
 use Tester\Assert;
 
-
 require_once __DIR__ . '/../bootstrap.php';
 
 
@@ -20,7 +19,6 @@ class PresenterMapperTest extends Tester\TestCase
 
     /** @var PresenterMapper */
     private $presenterMapper;
-
 
     /**
      * @return mixed[]

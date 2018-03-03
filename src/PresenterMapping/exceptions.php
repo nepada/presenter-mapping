@@ -5,7 +5,6 @@ namespace Nepada\PresenterMapping;
 
 use RuntimeException;
 
-
 /**
  * Common interface for exceptions
  */

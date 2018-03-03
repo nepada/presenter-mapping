@@ -6,7 +6,6 @@ namespace Nepada\Bridges\PresenterMappingDI;
 use Nepada\PresenterMapping;
 use Nette;
 
-
 class PresenterMappingExtension extends Nette\DI\CompilerExtension
 {
 

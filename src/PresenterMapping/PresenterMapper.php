@@ -5,7 +5,6 @@ namespace Nepada\PresenterMapping;
 
 use Nette;
 
-
 class PresenterMapper
 {
 
@@ -19,7 +18,6 @@ class PresenterMapper
         '' => ['', '*Module\\', '*Presenter'],
         'Nette' => ['NetteModule\\', '*\\', '*Presenter'],
     ];
-
 
     /**
      * Sets mapping as pairs [module:* => mask, presenter => class]:

@@ -5,13 +5,11 @@ namespace Nepada\PresenterMapping;
 
 use Nette;
 
-
 class PresenterFactory extends Nette\Application\PresenterFactory
 {
 
     /** @var PresenterMapper */
     private $presenterMapper;
-
 
     /**
      * @param PresenterMapper $presenterMapper
