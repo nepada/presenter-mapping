@@ -80,7 +80,7 @@ class PresenterMapper
         }
         uksort(
             $this->moduleMapping,
-            function ($a, $b) {
+            function ($a, $b): int {
                 return (substr_count($b, ':') - substr_count($a, ':')) ?: strcmp($b, $a);
             }
         );
