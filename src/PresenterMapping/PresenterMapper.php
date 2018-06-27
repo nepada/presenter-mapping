@@ -54,7 +54,7 @@ class PresenterMapper
         $class = ltrim($class, '\\');
 
         $conflict = array_search($class, $this->presenterMapping, true);
-        if ($conflict) {
+        if ($conflict !== false) {
             throw new Nette\InvalidStateException("Presenter class conflict: '$conflict' and '$presenter' both point to '$class'.");
         }
 
@@ -72,7 +72,7 @@ class PresenterMapper
     {
         $module = trim($module, ':');
         if (is_string($mask)) {
-            if (!preg_match('#^\\\\?([\w\\\\]*\\\\)?(\w*\*\w*?\\\\)?([\w\\\\]*\*\w*)\z#', $mask, $m)) {
+            if (!((bool) preg_match('#^\\\\?([\w\\\\]*\\\\)?(\w*\*\w*?\\\\)?([\w\\\\]*\*\w*)\z#', $mask, $m))) {
                 throw new Nette\InvalidStateException("Invalid mapping mask '$mask'.");
             }
             $this->moduleMapping[$module] = [$m[1], $m[2] ?: '*Module\\', $m[3]];
@@ -128,13 +128,13 @@ class PresenterMapper
     public function unformatPresenterClass(string $class): ?string
     {
         $presenter = array_search($class, $this->presenterMapping, true);
-        if ($presenter) {
+        if ($presenter !== false) {
             return $presenter;
         }
 
         foreach ($this->moduleMapping as $module => $mapping) {
             $mapping = str_replace(['\\', '*'], ['\\\\', '(\w+)'], $mapping);
-            if (preg_match("#^\\\\?$mapping[0]((?:$mapping[1])*)$mapping[2]\\z#i", $class, $matches)) {
+            if ((bool) preg_match("#^\\\\?$mapping[0]((?:$mapping[1])*)$mapping[2]\\z#i", $class, $matches)) {
                 return ($module === '' ? '' : $module . ':') . preg_replace("#$mapping[1]#iA", '$1:', $matches[1]) . $matches[3];
             }
         }
