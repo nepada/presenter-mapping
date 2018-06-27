@@ -103,10 +103,10 @@ class PresenterMapper
         }
 
         $parts = explode(':', $presenter);
-        $presenterName = array_pop($parts);
+        $presenterName = (string) array_pop($parts);
         $modules = [];
         while (!isset($this->moduleMapping[implode(':', $parts)])) {
-            array_unshift($modules, array_pop($parts));
+            array_unshift($modules, (string) array_pop($parts));
         }
         $mapping = $this->moduleMapping[implode(':', $parts)];
 
@@ -129,7 +129,7 @@ class PresenterMapper
     {
         $presenter = array_search($class, $this->presenterMapping, true);
         if ($presenter !== false) {
-            return $presenter;
+            return (string) $presenter;
         }
 
         foreach ($this->moduleMapping as $module => $mapping) {
