@@ -28,7 +28,6 @@ class PresenterMapper
      *
      * @param string[]|string[][] $mapping
      * @return static
-     * @throws Nette\InvalidStateException
      */
     public function setMapping(array $mapping): self
     {
@@ -46,7 +45,6 @@ class PresenterMapper
      * @param string $presenter
      * @param string $class
      * @return static
-     * @throws Nette\InvalidStateException
      */
     public function setPresenterMapping(string $presenter, string $class): self
     {
@@ -55,7 +53,7 @@ class PresenterMapper
 
         $conflict = array_search($class, $this->presenterMapping, true);
         if ($conflict !== false) {
-            throw new Nette\InvalidStateException("Presenter class conflict: '$conflict' and '$presenter' both point to '$class'.");
+            throw new \InvalidArgumentException("Presenter class conflict: '$conflict' and '$presenter' both point to '$class'.");
         }
 
         $this->presenterMapping[$presenter] = $class;
@@ -66,20 +64,19 @@ class PresenterMapper
      * @param string $module
      * @param string|string[] $mask
      * @return static
-     * @throws Nette\InvalidArgumentException
      */
     public function setModuleMapping(string $module, $mask): self
     {
         $module = trim($module, ':');
         if (is_string($mask)) {
             if (!((bool) preg_match('#^\\\\?([\w\\\\]*\\\\)?(\w*\*\w*?\\\\)?([\w\\\\]*\*\w*)\z#', $mask, $m))) {
-                throw new Nette\InvalidStateException("Invalid mapping mask '$mask'.");
+                throw new \InvalidArgumentException("Invalid mapping mask '$mask' for module '$module'.");
             }
             $this->moduleMapping[$module] = [$m[1], $m[2] ?: '*Module\\', $m[3]];
         } elseif (is_array($mask) && count($mask) === 3) {
             $this->moduleMapping[$module] = [$mask[0] !== '' ? $mask[0] . '\\' : '', $mask[1] . '\\', $mask[2]];
         } else {
-            throw new Nette\InvalidStateException("Invalid mapping mask for module '$module'.");
+            throw new \InvalidArgumentException("Invalid mapping mask for module '$module'.");
         }
         uksort(
             $this->moduleMapping,

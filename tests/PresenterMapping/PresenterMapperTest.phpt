@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace NepadaTests\PresenterMapping;
 
 use Nepada\PresenterMapping\PresenterMapper;
-use Nette;
 use Tester;
 use Tester\Assert;
 
@@ -20,20 +19,15 @@ class PresenterMapperTest extends Tester\TestCase
     /** @var PresenterMapper */
     private $presenterMapper;
 
-    /**
-     * @return mixed[]
-     */
-    public function getMapping(): array
+    protected function setUp(): void
     {
-        return [
-            ['Foo:Bar:Baz', 'BazPresenter'],
-            ['Foo:Bar:Xyz', 'FooBar\XyzFooBarPresenter'],
-            ['Foo:Bar:Abc:Xyz', 'FooBar\AbcFooBarModule\XyzFooBarPresenter'],
-            ['Foo:Abc:Xyz', 'Foo\AbcFooModule\XyzFooPresenter'],
-            ['Foo:Xyz', 'Foo\XyzFooPresenter'],
-            ['Abc:Xyz', 'App\Module\Abc\Presenter\Xyz'],
-            ['Xyz', 'App\Presenter\Xyz'],
-        ];
+        $this->presenterMapper = new PresenterMapper();
+        $this->presenterMapper->setMapping([
+            '*' => ['App', 'Module\*', 'Presenter\*'],
+            'Foo' => 'Foo\*FooModule\*FooPresenter',
+            'Foo:Bar' => 'FooBar\*FooBarModule\*FooBarPresenter',
+            'Foo:Bar:Baz' => 'BazPresenter',
+        ]);
     }
 
     /**
@@ -48,23 +42,32 @@ class PresenterMapperTest extends Tester\TestCase
     }
 
     /**
-     * @throws Nette\InvalidStateException Invalid mapping mask for module 'invalid'.
+     * @return mixed[]
      */
+    protected function getMapping(): array
+    {
+        return [
+            ['Foo:Bar:Baz', 'BazPresenter'],
+            ['Foo:Bar:Xyz', 'FooBar\XyzFooBarPresenter'],
+            ['Foo:Bar:Abc:Xyz', 'FooBar\AbcFooBarModule\XyzFooBarPresenter'],
+            ['Foo:Abc:Xyz', 'Foo\AbcFooModule\XyzFooPresenter'],
+            ['Foo:Xyz', 'Foo\XyzFooPresenter'],
+            ['Abc:Xyz', 'App\Module\Abc\Presenter\Xyz'],
+            ['Xyz', 'App\Presenter\Xyz'],
+        ];
+    }
+
     public function testInvalidMapping(): void
     {
         $presenterMapper = new PresenterMapper();
-        $presenterMapper->setMapping(['invalid' => ['*', '*']]);
-    }
 
-    protected function setUp(): void
-    {
-        $this->presenterMapper = new PresenterMapper();
-        $this->presenterMapper->setMapping([
-            '*' => ['App', 'Module\*', 'Presenter\*'],
-            'Foo' => 'Foo\*FooModule\*FooPresenter',
-            'Foo:Bar' => 'FooBar\*FooBarModule\*FooBarPresenter',
-            'Foo:Bar:Baz' => 'BazPresenter',
-        ]);
+        Assert::throws(
+            function () use ($presenterMapper): void {
+                $presenterMapper->setMapping(['invalid' => ['*', '*']]);
+            },
+            \InvalidArgumentException::class,
+            'Invalid mapping mask for module \'invalid\'.'
+        );
     }
 
 }
