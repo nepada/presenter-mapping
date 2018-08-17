@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace NepadaTests\PresenterMapping;
 
 use Nepada\PresenterMapping\PresenterMapper;
-use Tester;
+use NepadaTests\TestCase;
 use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
@@ -13,7 +13,7 @@ require_once __DIR__ . '/../bootstrap.php';
 /**
  * @testCase
  */
-class PresenterMapperTest extends Tester\TestCase
+class PresenterMapperTest extends TestCase
 {
 
     /** @var PresenterMapper */
