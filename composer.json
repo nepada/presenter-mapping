@@ -42,6 +42,11 @@
             "Nepada\\PresenterMapping\\": "src/PresenterMapping/"
         }
     },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.2-dev"
