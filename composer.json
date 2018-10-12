@@ -20,7 +20,7 @@
         "nette/application": "^2.4@dev"
     },
     "require-dev": {
-        "nette/tester": "^2.0",
+        "nette/tester": "^2.1",
         "nette/bootstrap": "^2.4.1@dev || ^3.0@dev",
         "nette/di": "^2.4.7@dev",
 
