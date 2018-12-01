@@ -25,11 +25,10 @@ class PresenterFactory extends Nette\Application\PresenterFactory
      * Formats presenter class name from its name.
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint
      * @param string $presenter
      * @return string
      */
-    public function formatPresenterClass($presenter)
+    public function formatPresenterClass($presenter): string
     {
         return $this->presenterMapper->formatPresenterClass($presenter);
     }
@@ -38,11 +37,10 @@ class PresenterFactory extends Nette\Application\PresenterFactory
      * Formats presenter name from class name.
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint
      * @param string $class
      * @return string|null
      */
-    public function unformatPresenterClass($class)
+    public function unformatPresenterClass($class): ?string
     {
         return $this->presenterMapper->unformatPresenterClass($class);
     }
@@ -50,12 +48,11 @@ class PresenterFactory extends Nette\Application\PresenterFactory
     /**
      * BC with Nette PresenterFactory, use PresenterMapping::setMapping() instead.
      *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint
      * @deprecated
      * @param string[]|string[][] $mapping
      * @return static
      */
-    public function setMapping(array $mapping)
+    public function setMapping(array $mapping): self
     {
         $this->presenterMapper->setMapping($mapping);
         return $this;
