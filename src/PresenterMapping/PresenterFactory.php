@@ -11,10 +11,6 @@ class PresenterFactory extends Nette\Application\PresenterFactory
     /** @var PresenterMapper */
     private $presenterMapper;
 
-    /**
-     * @param PresenterMapper $presenterMapper
-     * @param callable|null $factory function (string $class): IPresenter
-     */
     public function __construct(PresenterMapper $presenterMapper, ?callable $factory = null)
     {
         parent::__construct($factory);
@@ -24,11 +20,10 @@ class PresenterFactory extends Nette\Application\PresenterFactory
     /**
      * Formats presenter class name from its name.
      *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param string $presenter
      * @return string
      */
-    public function formatPresenterClass($presenter): string
+    public function formatPresenterClass(string $presenter): string
     {
         return $this->presenterMapper->formatPresenterClass($presenter);
     }
@@ -36,11 +31,10 @@ class PresenterFactory extends Nette\Application\PresenterFactory
     /**
      * Formats presenter name from class name.
      *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      * @param string $class
      * @return string|null
      */
-    public function unformatPresenterClass($class): ?string
+    public function unformatPresenterClass(string $class): ?string
     {
         return $this->presenterMapper->unformatPresenterClass($class);
     }
