@@ -15,11 +15,11 @@ class PresenterMappingExtension extends Nette\DI\CompilerExtension
         $container = $this->getContainerBuilder();
 
         $container->addDefinition($this->prefix('presenterMapper'))
-            ->setClass(PresenterMapping\PresenterMapper::class);
+            ->setType(PresenterMapping\PresenterMapper::class);
 
         $presenterFactory = $this->getNettePresenterFactory();
         $factory = $presenterFactory->getFactory();
-        $arguments = $factory !== null ? $factory->arguments : [];
+        $arguments = $factory->getEntity() !== null ? $factory->arguments : [];
         array_unshift($arguments, $this->prefix('@presenterMapper'));
         $presenterFactory->setFactory(PresenterMapping\PresenterFactory::class, $arguments);
     }
@@ -27,9 +27,9 @@ class PresenterMappingExtension extends Nette\DI\CompilerExtension
     /**
      * Make sure that ApplicationExtension is loaded before us and return its PresenterFactory definition.
      *
-     * @return Nette\DI\ServiceDefinition
+     * @return Nette\DI\Definitions\ServiceDefinition
      */
-    public function getNettePresenterFactory(): Nette\DI\ServiceDefinition
+    private function getNettePresenterFactory(): Nette\DI\Definitions\ServiceDefinition
     {
         $applicationExtension = $this->compiler->getExtensions(Nette\Bridges\ApplicationDI\ApplicationExtension::class);
         if ($applicationExtension === []) {
@@ -42,7 +42,10 @@ class PresenterMappingExtension extends Nette\DI\CompilerExtension
             throw new \LogicException('PresenterFactory service from ApplicationExtension not found. Make sure ApplicationExtension is loaded before PresenterMappingExtension.');
         }
 
-        return $container->getDefinition($presenterFactory);
+        /** @var Nette\DI\Definitions\ServiceDefinition $serviceDefinition */
+        $serviceDefinition = $container->getDefinition($presenterFactory);
+
+        return $serviceDefinition;
     }
 
 }
