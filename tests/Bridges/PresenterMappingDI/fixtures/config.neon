@@ -5,3 +5,6 @@ application:
     scanDirs: false
     mapping:
         *: App\*Module\*Presenter
+
+di:
+    debugger: false
