@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace Nepada\PresenterMapping;
 
 use Nette;
+use Nette\Utils\Strings;
 
 class PresenterMapper
 {
@@ -131,8 +132,9 @@ class PresenterMapper
 
         foreach ($this->moduleMapping as $module => $mapping) {
             $mapping = str_replace(['\\', '*'], ['\\\\', '(\w+)'], $mapping);
-            if ((bool) preg_match("#^\\\\?$mapping[0]((?:$mapping[1])*)$mapping[2]\\z#i", $class, $matches)) {
-                return ($module === '' ? '' : $module . ':') . preg_replace("#$mapping[1]#iA", '$1:', $matches[1]) . $matches[3];
+            $matches = Strings::match($class, "#^\\\\?$mapping[0]((?:$mapping[1])*)$mapping[2]\\z#i");
+            if ($matches !== null) {
+                return ($module === '' ? '' : $module . ':') . Strings::replace($matches[1], "#$mapping[1]#iA", '$1:') . $matches[3];
             }
         }
 
