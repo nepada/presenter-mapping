@@ -22,6 +22,7 @@
     "require-dev": {
         "nette/tester": "^2.1",
         "xificurk/phpstan-shim": "^0.11",
+        "jakub-onderka/php-parallel-lint": "^1.0",
         "nette/bootstrap": "^2.4.1@dev || ^3.0@dev",
         "nette/di": "^2.4.7@dev",
 
