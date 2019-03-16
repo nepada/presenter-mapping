@@ -45,9 +45,9 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/"
-        ]
+        "psr-4": {
+            "NepadaTests\\": "tests/"
+        }
     },
     "extra": {
         "branch-alias": {
