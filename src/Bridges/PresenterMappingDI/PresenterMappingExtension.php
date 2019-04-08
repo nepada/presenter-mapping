@@ -9,9 +9,13 @@ use Nette;
 class PresenterMappingExtension extends Nette\DI\CompilerExtension
 {
 
+    public function getConfigSchema(): Nette\Schema\Schema
+    {
+        return Nette\Schema\Expect::structure([]);
+    }
+
     public function loadConfiguration(): void
     {
-        $this->validateConfig([]);
         $container = $this->getContainerBuilder();
 
         $container->addDefinition($this->prefix('presenterMapper'))
