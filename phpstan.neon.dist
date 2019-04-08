@@ -16,11 +16,5 @@ parameters:
 
     ignoreErrors:
         -
-            message: '#Parameter \#1 \$presenter \(string\) of method Nepada\\PresenterMapping\\PresenterFactory::formatPresenterClass\(\) should be contravariant#' # false positive
-            path: %currentWorkingDirectory%/src/PresenterMapping/PresenterFactory.php
-        -
-            message: '#Parameter \#1 \$class \(string\) of method Nepada\\PresenterMapping\\PresenterFactory::unformatPresenterClass\(\) should be contravariant#' # false positive
-            path: %currentWorkingDirectory%/src/PresenterMapping/PresenterFactory.php
-        -
             message: '#Parameter \#1 \$mapping \(array<array<string>\|string>\) of method Nepada\\PresenterMapping\\PresenterFactory::setMapping\(\) should be contravariant#' # false positive
             path: %currentWorkingDirectory%/src/PresenterMapping/PresenterFactory.php
