@@ -42,7 +42,7 @@ class PresenterMappingExtension extends Nette\DI\CompilerExtension
 
         $container = $this->getContainerBuilder();
         $presenterFactory = reset($applicationExtension)->prefix('presenterFactory');
-        if (!$container->hasDefinition($presenterFactory)) {
+        if (! $container->hasDefinition($presenterFactory)) {
             throw new \LogicException('PresenterFactory service from ApplicationExtension not found. Make sure ApplicationExtension is loaded before PresenterMappingExtension.');
         }
 

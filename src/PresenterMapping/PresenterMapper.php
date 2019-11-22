@@ -72,7 +72,7 @@ class PresenterMapper
         if (is_array($mask) && count($mask) === 3) {
             $this->moduleMapping[$module] = [$mask[0] !== '' ? $mask[0] . '\\' : '', $mask[1] . '\\', $mask[2]];
         } elseif (is_string($mask)) {
-            if (!((bool) preg_match('#^\\\\?([\w\\\\]*\\\\)?(\w*\*\w*?\\\\)?([\w\\\\]*\*\w*)\z#', $mask, $m))) {
+            if (! ((bool) preg_match('#^\\\\?([\w\\\\]*\\\\)?(\w*\*\w*?\\\\)?([\w\\\\]*\*\w*)\z#', $mask, $m))) {
                 throw new \InvalidArgumentException("Invalid mapping mask '$mask' for module '$module'.");
             }
             $this->moduleMapping[$module] = [$m[1], $m[2] ?: '*Module\\', $m[3]];
@@ -103,7 +103,7 @@ class PresenterMapper
         $parts = explode(':', $presenter);
         $presenterName = (string) array_pop($parts);
         $modules = [];
-        while (!isset($this->moduleMapping[implode(':', $parts)])) {
+        while (! isset($this->moduleMapping[implode(':', $parts)])) {
             array_unshift($modules, (string) array_pop($parts));
         }
         $mapping = $this->moduleMapping[implode(':', $parts)];
