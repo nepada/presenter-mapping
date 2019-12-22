@@ -72,17 +72,18 @@ class PresenterMapper
         if (is_array($mask) && count($mask) === 3) {
             $this->moduleMapping[$module] = [$mask[0] !== '' ? $mask[0] . '\\' : '', $mask[1] . '\\', $mask[2]];
         } elseif (is_string($mask)) {
-            if (! ((bool) preg_match('#^\\\\?([\w\\\\]*\\\\)?(\w*\*\w*?\\\\)?([\w\\\\]*\*\w*)\z#', $mask, $m))) {
+            $m = Strings::match($mask, '#^\\\\?([\w\\\\]*\\\\)?(\w*\*\w*?\\\\)?([\w\\\\]*\*\w*)\z#');
+            if ($m === null) {
                 throw new \InvalidArgumentException("Invalid mapping mask '$mask' for module '$module'.");
             }
-            $this->moduleMapping[$module] = [$m[1], $m[2] ?: '*Module\\', $m[3]];
+            $this->moduleMapping[$module] = [$m[1], $m[2] ?? '*Module\\', $m[3]];
         } else {
             throw new \InvalidArgumentException("Invalid mapping mask for module '$module'.");
         }
         uksort(
             $this->moduleMapping,
-            function ($a, $b): int {
-                return (substr_count($b, ':') - substr_count($a, ':')) ?: strcmp($b, $a);
+            function (string $a, string $b): int {
+                return [substr_count($b, ':'), $b] <=> [substr_count($a, ':'), $a];
             }
         );
         return $this;
