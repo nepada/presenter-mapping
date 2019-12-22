@@ -82,9 +82,7 @@ class PresenterMapper
         }
         uksort(
             $this->moduleMapping,
-            function (string $a, string $b): int {
-                return [substr_count($b, ':'), $b] <=> [substr_count($a, ':'), $a];
-            }
+            fn (string $a, string $b): int => [substr_count($b, ':'), $b] <=> [substr_count($a, ':'), $a],
         );
         return $this;
     }

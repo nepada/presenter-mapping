@@ -65,7 +65,7 @@ class PresenterMapperTest extends TestCase
                 $presenterMapper->setMapping(['invalid' => ['*', '*']]);
             },
             \InvalidArgumentException::class,
-            'Invalid mapping mask for module \'invalid\'.'
+            'Invalid mapping mask for module \'invalid\'.',
         );
     }
 
