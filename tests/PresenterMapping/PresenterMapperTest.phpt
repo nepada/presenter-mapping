@@ -16,8 +16,7 @@ require_once __DIR__ . '/../bootstrap.php';
 class PresenterMapperTest extends TestCase
 {
 
-    /** @var PresenterMapper */
-    private $presenterMapper;
+    private PresenterMapper $presenterMapper;
 
     protected function setUp(): void
     {

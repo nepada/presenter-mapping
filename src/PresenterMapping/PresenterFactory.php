@@ -8,8 +8,7 @@ use Nette;
 class PresenterFactory extends Nette\Application\PresenterFactory
 {
 
-    /** @var PresenterMapper */
-    private $presenterMapper;
+    private PresenterMapper $presenterMapper;
 
     public function __construct(PresenterMapper $presenterMapper, ?callable $factory = null)
     {
