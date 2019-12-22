@@ -46,8 +46,8 @@ class PresenterMappingExtension extends Nette\DI\CompilerExtension
             throw new \LogicException('PresenterFactory service from ApplicationExtension not found. Make sure ApplicationExtension is loaded before PresenterMappingExtension.');
         }
 
-        /** @var Nette\DI\Definitions\ServiceDefinition $serviceDefinition */
         $serviceDefinition = $container->getDefinition($presenterFactory);
+        assert($serviceDefinition instanceof Nette\DI\Definitions\ServiceDefinition);
 
         return $serviceDefinition;
     }
