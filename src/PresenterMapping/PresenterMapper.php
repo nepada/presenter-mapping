@@ -11,10 +11,14 @@ class PresenterMapper
 
     use Nette\SmartObject;
 
-    /** @var string[] of presenter name => class */
+    /**
+     * @var string[] of presenter name => class
+     */
     private array $presenterMapping = [];
 
-    /** @var string[][] of module => splitted mask */
+    /**
+     * @var string[][] of module => splitted mask
+     */
     private array $moduleMapping = [
         '' => ['', '*Module\\', '*Presenter'],
         'Nette' => ['NetteModule\\', '*\\', '*Presenter'],
