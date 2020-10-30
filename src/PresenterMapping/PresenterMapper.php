@@ -104,7 +104,7 @@ class PresenterMapper
         }
 
         $parts = explode(':', $presenter);
-        $presenterName = (string) array_pop($parts);
+        $presenterName = array_pop($parts);
         $modules = [];
         while (! isset($this->moduleMapping[implode(':', $parts)])) {
             array_unshift($modules, (string) array_pop($parts));
