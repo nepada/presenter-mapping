@@ -29,9 +29,9 @@ class PresenterMappingExtensionTest extends TestCase
 
     public function testMapping(): void
     {
-        /** @var PresenterFactory $presenterFactory */
         $presenterFactory = $this->container->getByType(Nette\Application\IPresenterFactory::class);
 
+        Assert::type(PresenterFactory::class, $presenterFactory);
         Assert::same('App\FooModule\BarPresenter', $presenterFactory->formatPresenterClass('Foo:Bar'));
     }
 
