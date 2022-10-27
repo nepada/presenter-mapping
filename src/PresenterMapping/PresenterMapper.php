@@ -78,10 +78,12 @@ class PresenterMapper
         } elseif (is_string($mask)) {
             $m = Strings::match($mask, '#^\\\\?([\w\\\\]*\\\\)?(\w*\*\w*?\\\\)?([\w\\\\]*\*\w*)\z#');
             if ($m === null) {
+                $module = $module === '' ? '*' : $module;
                 throw new \InvalidArgumentException("Invalid mapping mask '$mask' for module '$module'.");
             }
-            $this->moduleMapping[$module] = [$m[1], $m[2] ?? '*Module\\', $m[3]];
+            $this->moduleMapping[$module] = [$m[1], $m[2] !== '' ? $m[2] : '*Module\\', $m[3]];
         } else {
+            $module = $module === '' ? '*' : $module;
             throw new \InvalidArgumentException("Invalid mapping mask for module '$module'.");
         }
         uksort(
