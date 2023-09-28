@@ -31,8 +31,6 @@ class PresenterMapperTest extends TestCase
 
     /**
      * @dataProvider getMapping
-     * @param string $presenter
-     * @param string $class
      */
     public function testMapping(string $presenter, string $class): void
     {

@@ -32,9 +32,9 @@ class PresenterMapper
      *      ['App:Foo' => 'App\FooModule\*Module\*Presenter', '*' => '*Module\*Presenter']
      *
      * @param string[]|string[][] $mapping
-     * @return static
+     * @return $this
      */
-    public function setMapping(array $mapping): self
+    public function setMapping(array $mapping): static
     {
         foreach ($mapping as $name => $mask) {
             if (is_string($mask) && strpos($mask, '*') === false) {
@@ -46,12 +46,7 @@ class PresenterMapper
         return $this;
     }
 
-    /**
-     * @param string $presenter
-     * @param string $class
-     * @return static
-     */
-    public function setPresenterMapping(string $presenter, string $class): self
+    public function setPresenterMapping(string $presenter, string $class): static
     {
         $presenter = trim($presenter, ':');
         $class = ltrim($class, '\\');
@@ -66,11 +61,10 @@ class PresenterMapper
     }
 
     /**
-     * @param string $module
      * @param string|string[] $mask
-     * @return static
+     * @return $this
      */
-    public function setModuleMapping(string $module, $mask): self
+    public function setModuleMapping(string $module, string|array $mask): static
     {
         $module = trim($module, ':');
         if (is_array($mask) && count($mask) === 3) {
@@ -95,9 +89,6 @@ class PresenterMapper
 
     /**
      * Formats presenter class name from its name.
-     *
-     * @param string $presenter
-     * @return string
      */
     public function formatPresenterClass(string $presenter): string
     {
@@ -124,9 +115,6 @@ class PresenterMapper
 
     /**
      * Formats presenter name from class name.
-     *
-     * @param string $class
-     * @return string|null
      */
     public function unformatPresenterClass(string $class): ?string
     {

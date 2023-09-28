@@ -30,8 +30,6 @@ class PresenterMappingExtension extends Nette\DI\CompilerExtension
 
     /**
      * Make sure that ApplicationExtension is loaded before us and return its PresenterFactory definition.
-     *
-     * @return Nette\DI\Definitions\ServiceDefinition
      */
     private function getNettePresenterFactory(): Nette\DI\Definitions\ServiceDefinition
     {

@@ -18,9 +18,6 @@ class PresenterFactory extends Nette\Application\PresenterFactory
 
     /**
      * Formats presenter class name from its name.
-     *
-     * @param string $presenter
-     * @return string
      */
     public function formatPresenterClass(string $presenter): string
     {
@@ -29,9 +26,6 @@ class PresenterFactory extends Nette\Application\PresenterFactory
 
     /**
      * Formats presenter name from class name.
-     *
-     * @param string $class
-     * @return string|null
      */
     public function unformatPresenterClass(string $class): ?string
     {
@@ -41,9 +35,9 @@ class PresenterFactory extends Nette\Application\PresenterFactory
     /**
      * @deprecated BC with Nette PresenterFactory, use PresenterMapping::setMapping() instead.
      * @param string[]|string[][] $mapping
-     * @return static
+     * @return $this
      */
-    public function setMapping(array $mapping): self
+    public function setMapping(array $mapping): static
     {
         $this->presenterMapper->setMapping($mapping);
         return $this;
