@@ -12,12 +12,12 @@ class PresenterMapper
     use Nette\SmartObject;
 
     /**
-     * @var string[] of presenter name => class
+     * @var array<string, string> of presenter name => class
      */
     private array $presenterMapping = [];
 
     /**
-     * @var string[][] of module => splitted mask
+     * @var array<string, list<string>> of module => splitted mask
      */
     private array $moduleMapping = [
         '' => ['', '*Module\\', '*Presenter'],
@@ -31,7 +31,7 @@ class PresenterMapper
      * Example 2 - set mapping for modules:
      *      ['App:Foo' => 'App\FooModule\*Module\*Presenter', '*' => '*Module\*Presenter']
      *
-     * @param string[]|string[][] $mapping
+     * @param array<string, string|list<string>> $mapping
      * @return $this
      */
     public function setMapping(array $mapping): static
@@ -61,7 +61,7 @@ class PresenterMapper
     }
 
     /**
-     * @param string|string[] $mask
+     * @param string|list<string> $mask
      * @return $this
      */
     public function setModuleMapping(string $module, string|array $mask): static
@@ -120,11 +120,12 @@ class PresenterMapper
     {
         $presenter = array_search($class, $this->presenterMapping, true);
         if ($presenter !== false) {
-            return (string) $presenter;
+            return $presenter;
         }
 
         foreach ($this->moduleMapping as $module => $mapping) {
             $mapping = str_replace(['\\', '*'], ['\\\\', '(\w+)'], $mapping);
+            /** @var array<string>|null $matches */
             $matches = Strings::match($class, "#^\\\\?$mapping[0]((?:$mapping[1])*)$mapping[2]\\z#i");
             if ($matches !== null) {
                 return ($module === '' ? '' : $module . ':') . Strings::replace($matches[1], "#$mapping[1]#iA", '$1:') . $matches[3];

@@ -39,7 +39,7 @@ class PresenterMapperTest extends TestCase
     }
 
     /**
-     * @return mixed[]
+     * @return list<mixed[]>
      */
     protected function getMapping(): array
     {

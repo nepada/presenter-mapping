@@ -34,7 +34,7 @@ class PresenterFactory extends Nette\Application\PresenterFactory
 
     /**
      * @deprecated BC with Nette PresenterFactory, use PresenterMapping::setMapping() instead.
-     * @param string[]|string[][] $mapping
+     * @param array<string, string|list<string>> $mapping
      * @return $this
      */
     public function setMapping(array $mapping): static

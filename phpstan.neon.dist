@@ -26,5 +26,5 @@ parameters:
 
     ignoreErrors:
         - # false positive
-            message: '#Parameter \#1 \$mapping \(array<array<string>\|string>\) of method Nepada\\PresenterMapping\\PresenterFactory::setMapping\(\) should be contravariant#'
+            message: '#Parameter \#1 \$mapping \(array<string, list<string>\|string>\) of method Nepada\\PresenterMapping\\PresenterFactory::setMapping\(\) should be contravariant#'
             path: src/PresenterMapping/PresenterFactory.php
