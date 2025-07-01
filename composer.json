@@ -20,7 +20,7 @@
         "nette/application": "^3.1.4@dev"
     },
     "require-dev": {
-        "nette/tester": "2.5.4",
+        "nette/tester": "2.5.5",
         "phpstan/phpstan": "2.1.17",
         "phpstan/phpstan-strict-rules": "2.0.4",
         "phpstan/phpstan-nette": "2.0.3",
