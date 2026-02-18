@@ -9,6 +9,7 @@ includes:
     - vendor/spaze/phpstan-disallowed-calls/disallowed-loose-calls.neon
     - tests/PHPStan/disallowedCalls.neon
     - tests/PHPStan/shipmonk.neon
+    - tests/PHPStan/conditional.config.php
 
 parameters:
     level: max
@@ -23,8 +24,3 @@ parameters:
         uncheckedExceptionClasses:
             - LogicException
             - Nette\InvalidStateException
-
-    ignoreErrors:
-        - # false positive
-            message: '#Parameter \#1 \$mapping \(array<string, list<string>\|string>\) of method Nepada\\PresenterMapping\\PresenterFactory::setMapping\(\) should be contravariant#'
-            path: src/PresenterMapping/PresenterFactory.php

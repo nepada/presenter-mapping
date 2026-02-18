@@ -17,7 +17,7 @@ class PresenterMapper
     private array $presenterMapping = [];
 
     /**
-     * @var array<string, list<string>> of module => splitted mask
+     * @var array<string, array{string, string, string}> of module => splitted mask
      */
     private array $moduleMapping = [
         '' => ['', '*Module\\', '*Presenter'],
@@ -31,7 +31,7 @@ class PresenterMapper
      * Example 2 - set mapping for modules:
      *      ['App:Foo' => 'App\FooModule\*Module\*Presenter', '*' => '*Module\*Presenter']
      *
-     * @param array<string, string|list<string>> $mapping
+     * @param array<string, string|array{string, string, string}> $mapping
      * @return $this
      */
     public function setMapping(array $mapping): static
@@ -61,13 +61,13 @@ class PresenterMapper
     }
 
     /**
-     * @param string|list<string> $mask
+     * @param string|array{string, string, string} $mask
      * @return $this
      */
     public function setModuleMapping(string $module, string|array $mask): static
     {
         $module = trim($module, ':');
-        if (is_array($mask) && count($mask) === 3) {
+        if (is_array($mask) && count($mask) === 3) { // @phpstan-ignore identical.alwaysTrue (re-validation of array shape not enforced by type system)
             $this->moduleMapping[$module] = [$mask[0] !== '' ? $mask[0] . '\\' : '', $mask[1] . '\\', $mask[2]];
         } elseif (is_string($mask)) {
             $m = Strings::match($mask, '#^\\\\?([\w\\\\]*\\\\)?(\w*\*\w*?\\\\)?([\w\\\\]*\*\w*)\z#');

@@ -14,10 +14,11 @@ updates:
       - dependency-type: "development"
     ignore:
       - dependency-name: "nette/di"
+      - dependency-name: "nette/schema"
       - dependency-name: "nette/bootstrap"
+      - dependency-name: "composer-runtime-api"
       - dependency-name: "nette/neon"
       - dependency-name: "nette/http"
-      - dependency-name: "nette/schema"
       - dependency-name: "nette/routing"
     groups:
         phpstan:
