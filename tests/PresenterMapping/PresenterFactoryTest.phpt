@@ -89,7 +89,7 @@ class PresenterFactoryTest extends TestCase
         Assert::exception(
             function (): void {
                 $factory = $this->presenterFactory;
-                $factory->setMapping([
+                $factory->setMapping([ // @phpstan-ignore argument.type (intentional)
                     '*' => ['*', '*'],
                 ]);
             },

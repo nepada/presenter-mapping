@@ -60,7 +60,7 @@ class PresenterMapperTest extends TestCase
 
         Assert::throws(
             function () use ($presenterMapper): void {
-                $presenterMapper->setMapping(['invalid' => ['*', '*']]);
+                $presenterMapper->setMapping(['invalid' => ['*', '*']]); // @phpstan-ignore argument.type (intentional)
             },
             \InvalidArgumentException::class,
             'Invalid mapping mask for module \'invalid\'.',
