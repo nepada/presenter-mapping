@@ -46,7 +46,10 @@ class PresenterMapper
         return $this;
     }
 
-    public function setPresenterMapping(string $presenter, string $class): static
+    public function setPresenterMapping(
+        string $presenter,
+        string $class,
+    ): static
     {
         $presenter = trim($presenter, ':');
         $class = ltrim($class, '\\');
@@ -64,7 +67,10 @@ class PresenterMapper
      * @param string|array{string, string, string} $mask
      * @return $this
      */
-    public function setModuleMapping(string $module, string|array $mask): static
+    public function setModuleMapping(
+        string $module,
+        string|array $mask,
+    ): static
     {
         $module = trim($module, ':');
         if (is_array($mask) && count($mask) === 3) { // @phpstan-ignore identical.alwaysTrue (re-validation of array shape not enforced by type system)

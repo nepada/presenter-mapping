@@ -32,7 +32,10 @@ class PresenterMapperTest extends TestCase
     /**
      * @dataProvider getMapping
      */
-    public function testMapping(string $presenter, string $class): void
+    public function testMapping(
+        string $presenter,
+        string $class,
+    ): void
     {
         Assert::same($class, $this->presenterMapper->formatPresenterClass($presenter));
         Assert::same($presenter, $this->presenterMapper->unformatPresenterClass($class));
