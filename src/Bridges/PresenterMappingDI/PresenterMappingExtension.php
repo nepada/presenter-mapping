@@ -22,10 +22,15 @@ class PresenterMappingExtension extends Nette\DI\CompilerExtension
             ->setType(PresenterMapping\PresenterMapper::class);
 
         $presenterFactory = $this->getNettePresenterFactory();
-        $factory = $presenterFactory->getFactory();
-        $arguments = $factory->getEntity() !== null ? $factory->arguments : [];
-        array_unshift($arguments, $this->prefix('@presenterMapper'));
-        $presenterFactory->setFactory(PresenterMapping\PresenterFactory::class, $arguments);
+        $creator = $presenterFactory->getCreator();
+        if (! $creator instanceof Nette\DI\Definitions\Statement) {
+            $statementClass = Nette\DI\Definitions\Statement::class;
+            throw new \LogicException("Unexpected creator of PresenterFactory service, expected {$statementClass}.");
+        }
+        $presenterFactory->setCreator(
+            PresenterMapping\PresenterFactory::class,
+            [$this->prefix('@presenterMapper'), ...$creator->arguments],
+        );
     }
 
     /**
